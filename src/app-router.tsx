@@ -1,17 +1,17 @@
 
 import { lazy, Suspense, } from 'react';
 import { Navigate, Outlet, ScrollRestoration, createBrowserRouter } from 'react-router';
-import Home from './pages/Home';
-import SchemeDetails from './pages/mutual-funds/SchemeDetails';
+import Home from './modules/Home';
 import './App.css';
 import PageLoader from './components/common/PageLoader';
 import Footer from './components/common/Footer';
 
 // Lazy load FD and Mutual Funds pages for code splitting
-const FD = lazy(() => import('./pages/fd/FD'));
-const MutualFunds = lazy(() => import('./pages/mutual-funds/MutualFunds'));
-const MyFunds = lazy(() => import('./pages/mutual-funds/MyFunds'));
-const MyFundDetails = lazy(() => import('./pages/mutual-funds/MyFundDetails'));
+const FD = lazy(() => import('./modules/fd/FD'));
+const MutualFunds = lazy(() => import('./modules/mutual-funds/MutualFunds'));
+const SchemeDetails = lazy(() => import('./modules/mutual-funds/SchemeDetails'));
+const MyFunds = lazy(() => import('./modules/mutual-funds/MyFunds'));
+const MyFundDetails = lazy(() => import('./modules/mutual-funds/MyFundDetails'));
 
 const Layout = () => {
     return (
