@@ -3,6 +3,26 @@ import moment from 'moment';
 import type { UserInvestment } from '../types/mutual-funds';
 import Modal from '../../../components/common/Modal';
 
+/**
+ * Convert HTML date input format (YYYY-MM-DD) to DD-MM-YYYY format
+ */
+const formatDateForStorage = (htmlDateFormat: string): string => {
+  if (!htmlDateFormat) return '';
+  // HTML input gives YYYY-MM-DD, we need DD-MM-YYYY
+  const date = moment(htmlDateFormat, 'YYYY-MM-DD');
+  return date.format('DD-MM-YYYY');
+};
+
+/**
+ * Convert DD-MM-YYYY format to HTML date input format (YYYY-MM-DD)
+ */
+const formatDateForInput = (storageDateFormat: string): string => {
+  if (!storageDateFormat) return '';
+  // Storage format is DD-MM-YYYY, HTML input needs YYYY-MM-DD
+  const date = moment(storageDateFormat, 'DD-MM-YYYY');
+  return date.format('YYYY-MM-DD');
+};
+
 interface AddInvestmentModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -23,26 +43,29 @@ export default function AddInvestmentModal({
   mode = 'add',
 }: AddInvestmentModalProps) {
   const [investmentType, setInvestmentType] = useState<'lumpsum' | 'sip'>('lumpsum');
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
+  // Store as YYYY-MM-DD for HTML input element, will convert to DD-MM-YYYY on submit
+  const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'));
   const [amount, setAmount] = useState('');
   const [sipAmount, setSipAmount] = useState('');
   const [sipMonthlyDate, setSipMonthlyDate] = useState('1');
   const [sipCancelled, setSipCancelled] = useState(false);
   const [sipEndDate, setSipEndDate] = useState('');
-  const [sipAmountChangeDate, setSipAmountChangeDate] = useState(new Date().toISOString().split('T')[0]);
+  const [sipAmountChangeDate, setSipAmountChangeDate] = useState(moment().format('YYYY-MM-DD'));
   const [isChangingAmount, setIsChangingAmount] = useState(false);
 
   // Initialize form when editing
   useEffect(() => {
     if (mode === 'edit' && editingInvestment) {
       setInvestmentType(editingInvestment.investmentType);
-      setStartDate(editingInvestment.startDate);
+      // Convert DD-MM-YYYY to YYYY-MM-DD for HTML input
+      setStartDate(formatDateForInput(editingInvestment.startDate));
       setAmount(editingInvestment.amount.toString());
       setSipAmount(editingInvestment.sipAmount?.toString() || '');
       setSipMonthlyDate(editingInvestment.sipMonthlyDate?.toString() || '1');
       setSipCancelled(!!editingInvestment.sipEndDate);
-      setSipEndDate(editingInvestment.sipEndDate || '');
-      setSipAmountChangeDate(new Date().toISOString().split('T')[0]);
+      // Convert DD-MM-YYYY to YYYY-MM-DD for HTML input
+      setSipEndDate(editingInvestment.sipEndDate ? formatDateForInput(editingInvestment.sipEndDate) : '');
+      setSipAmountChangeDate(moment().format('YYYY-MM-DD'));
       setIsChangingAmount(false);
     } else {
       resetForm();
@@ -71,11 +94,11 @@ export default function AddInvestmentModal({
     let investment: UserInvestment = {
       schemeCode,
       investmentType,
-      startDate,
+      startDate: formatDateForStorage(startDate),
       amount: investmentType === 'lumpsum' ? parseFloat(amount) : 0,
       sipAmount: investmentType === 'sip' ? parseFloat(sipAmount) : undefined,
       sipMonthlyDate: investmentType === 'sip' ? parseInt(sipMonthlyDate) : undefined,
-      sipEndDate: investmentType === 'sip' && sipCancelled ? sipEndDate : undefined,
+      sipEndDate: investmentType === 'sip' && sipCancelled ? formatDateForStorage(sipEndDate) : undefined,
     };
 
     // Handle SIP amount modification with effective date (past or future)
@@ -84,8 +107,8 @@ export default function AddInvestmentModal({
       const oldAmount = editingInvestment.sipAmount || 0;
 
       // Validate effective date is not before SIP start date
-      const effectiveDate = moment(sipAmountChangeDate);
-      const sipStartDate = moment(editingInvestment.startDate);
+      const effectiveDate = moment(sipAmountChangeDate, 'YYYY-MM-DD');
+      const sipStartDate = moment(editingInvestment.startDate, 'DD-MM-YYYY');
 
       if (effectiveDate.isBefore(sipStartDate)) {
         alert(`Effective date cannot be before SIP start date (${sipStartDate.format('DD-MMM-YYYY')})`);
@@ -95,24 +118,27 @@ export default function AddInvestmentModal({
       // Only add modification if amount actually changed
       if (newAmount !== oldAmount) {
         const modifications = editingInvestment.sipAmountModifications || [];
+        
+        // Convert effective date to DD-MM-YYYY format
+        const effectiveDateFormatted = formatDateForStorage(sipAmountChangeDate);
 
         // Check if modification for this date already exists
         const existingModIndex = modifications.findIndex(
-          m => m.effectiveDate === sipAmountChangeDate
+          m => m.effectiveDate === effectiveDateFormatted
         );
 
         if (existingModIndex >= 0) {
           modifications[existingModIndex].amount = newAmount;
         } else {
           modifications.push({
-            effectiveDate: sipAmountChangeDate,
+            effectiveDate: effectiveDateFormatted,
             amount: newAmount,
           });
         }
 
         // Sort modifications by effective date
-        modifications.sort((a, b) =>
-          new Date(a.effectiveDate).getTime() - new Date(b.effectiveDate).getTime()
+        modifications.sort((a, b) => 
+          moment(a.effectiveDate, 'DD-MM-YYYY').diff(moment(b.effectiveDate, 'DD-MM-YYYY'))
         );
 
         investment.sipAmountModifications = modifications;
@@ -125,13 +151,13 @@ export default function AddInvestmentModal({
 
   const resetForm = () => {
     setInvestmentType('lumpsum');
-    setStartDate(new Date().toISOString().split('T')[0]);
+    setStartDate(moment().format('YYYY-MM-DD'));
     setAmount('');
     setSipAmount('');
     setSipMonthlyDate('1');
     setSipCancelled(false);
     setSipEndDate('');
-    setSipAmountChangeDate(new Date().toISOString().split('T')[0]);
+    setSipAmountChangeDate(moment().format('YYYY-MM-DD'));
     setIsChangingAmount(false);
   };
 

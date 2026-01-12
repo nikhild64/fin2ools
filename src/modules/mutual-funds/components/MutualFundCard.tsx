@@ -40,7 +40,7 @@ export default function MutualFundCard({ scheme }: MutualFundCardProps) {
             >
                 <div className="flex flex-col h-full justify-between">
                     {/* Header: Scheme Name + NAV */}
-                    <div className="mb-4">
+                    <div className="mb-1">
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-4">
                             <div className="flex-1">
                                 <h3
