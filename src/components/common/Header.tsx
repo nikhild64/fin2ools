@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Back from './Back';
 
 export default function Header() {
@@ -44,8 +44,38 @@ export default function Header() {
             </button>
 
             <nav className="hidden md:flex space-x-8">
-              <a
-                href="#contact"
+              <Link
+                to="/mutual-funds/my-funds"
+                className="transition"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                My Funds
+              </Link>
+               <Link
+                to="/mutual-funds/explore-funds"
+                className="transition"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                Explore Funds
+              </Link>
+              <Link
+                to="/"
                 className="transition"
                 style={{
                   color: 'var(--color-text-secondary)',
@@ -58,7 +88,7 @@ export default function Header() {
                 }}
               >
                 Contact
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

@@ -20,6 +20,7 @@ import AddInvestmentModal from './AddInvestmentModal';
 import Accordion from '../../../components/common/Accordion';
 import Loader from '../../../components/common/Loader';
 import FundInvestmentHistory from './FundInvestmentHistory';
+import FundHeader from './FundHeader';
 
 export default function FundInvestmentDetails() {
   const { schemeCode } = useParams<{ schemeCode: string }>();
@@ -161,45 +162,7 @@ export default function FundInvestmentDetails() {
 
       <main className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* Scheme Header */}
-        <section className="mb-6 rounded-lg p-6 border grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4"
-          style={{
-            borderColor: 'var(--color-border-light)',
-          }}
-        >
-          <div className='col-span-5'>
-            <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
-              {scheme.schemeName}
-            </h1>
-            {scheme.fundHouse && (
-              <p style={{ color: 'var(--color-primary-main)' }}>
-                <span className="font-semibold">Fund House:</span> {scheme.fundHouse}
-              </p>
-            )}
-            {scheme.schemeCategory && (
-              <p style={{ color: 'var(--color-text-secondary)' }}>
-                <span className="font-semibold">Category:</span> {scheme.schemeCategory}
-              </p>
-            )}
-            {investmentDuration > 0 && (
-              <p className="text-md font-bold" style={{ color: 'var(--color-info)' }}>
-                <span className="font-semibold">Investment Duration:</span> {investmentDuration.toFixed(1)} years
-              </p>
-            )}
-          </div>
-          <div className="text-right" style={{ borderColor: 'var(--color-border-light)' }}>
-            <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>Current NAV</p>
-            <p className="text-2xl font-bold" style={{ color: 'var(--color-secondary-main)' }}>
-              ₹{currentNav.toFixed(2)}
-            </p>
-            {scheme.date && (
-              <p className="text-xs mt-1" style={{ color: 'var(--color-text-secondary)' }}>
-                As of {scheme.date}
-              </p>
-            )}
-          </div>
-
-        </section>
+        <FundHeader scheme={scheme} duration={investmentDuration} />
 
         {/* Investment Summary */}
         <section className="mb-6">

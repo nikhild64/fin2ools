@@ -1,19 +1,8 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+
 import Header from '../../components/common/Header';
 import MutualFundList from './components/MutualFundList';
-import { useInvestmentStore } from './store';
 
 export default function MutualFunds() {
-  const navigate = useNavigate();
-  const { loadInvestments, hasInvestments } = useInvestmentStore();
-
-  useEffect(() => {
-    loadInvestments();
-  }, [loadInvestments]);
-
-
-
   return (
     <div className="min-h-screen" style={{
       backgroundColor: 'var(--color-bg-primary)',
@@ -35,47 +24,6 @@ export default function MutualFunds() {
             Explore and track mutual fund schemes with latest NAV data.
           </p>
         </section>
-
-        {/* Navigation Tabs */}
-        {hasInvestments && (
-          <div className="flex gap-4 mb-8">
-            <button
-              onClick={() => navigate('/mutual-funds/explore-funds')}
-              className="px-6 py-2 rounded-lg font-medium transition"
-              style={{
-                backgroundColor: 'var(--color-primary-main)',
-                color: 'var(--color-text-inverse)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-bg-tertiary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
-              }}
-            >
-              Explore Funds
-            </button>
-            <button
-              onClick={() => navigate('/mutual-funds/my-funds')}
-              className="px-6 py-2 rounded-lg font-medium transition"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                color: 'var(--color-text-secondary)',
-                border: `1px solid var(--color-border-main)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-dark)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-main)';
-              }}
-            >
-              My Funds
-            </button>
-
-          </div>
-        )}
-
         <section>
           <MutualFundList />
         </section>

@@ -70,7 +70,6 @@ export default function MyFunds() {
       style={{ backgroundColor: 'var(--color-bg-primary)' }}
     >
       <Header />
-
       <header
         className="backdrop-blur-sm py-4"
         style={{

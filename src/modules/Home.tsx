@@ -30,7 +30,7 @@ export default function Home() {
         </section>
 
         {/* Features Grid */}
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           <div className="cursor-pointer">
             <FeatureTile
               title="FD Projections"
