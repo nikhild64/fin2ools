@@ -12,48 +12,31 @@ export default function Accordion({ title, isOpen, onToggle, children }: Accordi
 
     return (
         <div
-          className="rounded-lg overflow-hidden"
-          style={{
-            backgroundColor: 'var(--color-bg-secondary)',
-            border: '1px solid var(--color-border-light)',
-          }}
+          className="rounded-lg overflow-hidden bg-bg-secondary border border-border-light"
         >
             {/* Accordion Header */}
             <button
                 onClick={() => toggleAccordion()}
-                className="w-full px-6 py-4 flex items-center justify-between transition"
-                style={{
-                  borderBottom: isAccordionOpen ? '1px solid var(--color-border-light)' : 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--color-bg-primary)';
-                 // e.currentTarget.style.opacity = '0.1';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  // e.currentTarget.style.opacity = '1';
-                }}
+                className={`w-full px-6 py-4 flex items-center justify-between transition hover:bg-bg-primary ${
+                  isAccordionOpen ? 'border-b border-border-light' : ''
+                }`}
             >
                 <h3
-                  className="text-lg font-semibold"
-                  style={{ color: 'var(--color-text-secondary)' }}
+                  className="text-lg font-semibold text-text-secondary"
                 >
                   {title}
                 </h3>
                 <div className="flex items-center gap-2">
                     <span
-                      className="text-sm font-medium"
-                      style={{ color: 'var(--color-text-secondary)' }}
+                      className="text-sm font-medium text-text-secondary"
                     >
                         {isAccordionOpen ? 'Hide' : 'Show'}
                     </span>
                     <svg
-                        className={`w-5 h-5 transition-transform ${isAccordionOpen ? 'transform rotate-180' : ''}
-                            `}
+                        className={`w-5 h-5 transition-transform text-text-secondary ${isAccordionOpen ? 'transform rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        style={{ color: 'var(--color-text-secondary)' }}
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
@@ -63,11 +46,7 @@ export default function Accordion({ title, isOpen, onToggle, children }: Accordi
             {/* Accordion Content */}
             {isAccordionOpen && (
                 <div
-                  className="p-2"
-                  style={{
-                    borderTop: '1px solid var(--color-border-light)',
-                    backgroundColor: 'var(--color-bg-primary)',
-                  }}
+                  className="p-2 border-t border-border-light bg-bg-primary"
                 >
                     {children}
                 </div>

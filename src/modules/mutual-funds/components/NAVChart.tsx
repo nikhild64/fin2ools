@@ -22,7 +22,7 @@ export default function NAVChart({ navData, timeframeLabel }: NAVChartProps) {
     if (navData.length === 0) {
         return (
             <div className="text-center py-8">
-                <p style={{ color: 'var(--color-text-secondary)' }}>No chart data available</p>
+                <p className="text-text-secondary">No chart data available</p>
             </div>
         );
     }

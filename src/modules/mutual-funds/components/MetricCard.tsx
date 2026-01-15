@@ -13,35 +13,31 @@ export default function MetricCard({
   colorKey = 'primary',
   subtext = '',
 }: MetricCardProps) {
-  const getColor = () => {
+  const getColorClass = () => {
     const colors: Record<string, string> = {
-      primary: 'var(--color-primary-main)',
-      secondary: 'var(--color-secondary-main)',
-      success: 'var(--color-status-success)',
-      error: 'var(--color-error)',
-      warning: 'var(--color-warning)',
-      info: 'var(--color-info)',
-      cyan: 'var(--color-accent-cyan)',
+      primary: 'text-primary-main',
+      secondary: 'text-secondary-main',
+      success: 'text-success',
+      error: 'text-error',
+      warning: 'text-warning',
+      info: 'text-info',
+      cyan: 'text-secondary-main',
     };
     return colors[colorKey] || colors.primary;
   };
 
   return (
-    <div className="rounded-lg p-4 border"
-      style={{
-        backgroundColor: 'var(--color-bg-secondary)',
-        borderColor: 'var(--color-border-light)',
-      }}
+    <div className="rounded-lg p-4 border bg-bg-secondary border-border-light"
     >
-      <p className="text-sm font-medium mb-2" style={{ color: 'var(--color-text-secondary)' }}>
+      <p className="text-sm font-medium mb-2 text-text-secondary">
         {label}
       </p>
-      <p className="text-3xl font-bold" style={{ color: getColor() }}>
+      <p className={`text-3xl font-bold ${getColorClass()}`}>
         {value}
         {suffix && <span className="text-lg ml-1">{suffix}</span>}
       </p>
       {subtext && (
-        <p className="text-xs mt-2" style={{ color: 'var(--color-text-secondary)' }}>
+        <p className="text-xs mt-2 text-text-secondary">
           {subtext}
         </p>
       )}

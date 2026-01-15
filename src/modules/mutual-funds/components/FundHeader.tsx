@@ -4,27 +4,27 @@ import SchemeNAV from "./SchemeNAV";
 export default function FundHeader({ scheme, duration }: { scheme: MutualFundScheme; duration?: string }) {
 
     return (
-        <section className="mb-4 border border-blue-500/30 rounded-lg p-4" >
+        <section className="mb-4 border border-primary-lighter/30 rounded-lg p-4" >
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                 <div className="flex-1">
-                    <h1 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    <h1 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
                         {scheme.schemeName}
                     </h1>
 
                     {scheme.fundHouse && (
-                        <p className="text-blue-300 text-lg mb-2">
-                            <span className="text-blue-400 font-semibold">Fund House:</span> {scheme.fundHouse}
+                        <p className="text-info text-lg mb-2">
+                            <span className="text-info font-semibold">Fund House:</span> {scheme.fundHouse}
                         </p>
                     )}
                     {scheme.schemeCategory && (
-                        <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                        <p className="text-xs text-text-secondary">
                             Category: <b>{scheme.schemeCategory}</b>
                         </p>
                     )}
                     {
                         duration && (
-                            <p className="text-blue-300 text-lg">
-                                <span className="text-blue-400 font-semibold">Investment Duration:</span> {duration}
+                            <p className="text-info text-lg">
+                                <span className="text-info font-semibold">Investment Duration:</span> {duration}
                             </p>
 
                         )

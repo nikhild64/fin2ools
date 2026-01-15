@@ -8,27 +8,18 @@ interface PPFReturnsSummaryProps {
 export default function PPFReturnsSummary({ result }: PPFReturnsSummaryProps) {
   return (
     <div
-      className="rounded-lg overflow-hidden mt-8"
-      style={{
-        backgroundColor: 'var(--color-bg-primary)',
-        border: '1px solid var(--color-border-light)',
-      }}
+      className="rounded-lg overflow-hidden mt-8 bg-bg-primary border border-border-light"
     >
       <div
-        className="px-6 py-4"
-        style={{
-          borderBottom: '1px solid var(--color-border-light)',
-        }}
+        className="px-6 py-4 border-b border-border-light"
       >
         <h2
-          className="text-2xl font-bold"
-          style={{ color: 'var(--color-text-primary)' }}
+          className="text-2xl font-bold text-text-primary"
         >
           PPF Returns Summary
         </h2>
         <p
-          className="text-sm mt-1"
-          style={{ color: 'var(--color-text-secondary)' }}
+          className="text-sm mt-1 text-text-secondary"
         >
           Investment overview and projected returns
         </p>
@@ -39,21 +30,15 @@ export default function PPFReturnsSummary({ result }: PPFReturnsSummaryProps) {
         <div className="space-y-6">
           {/* Total Invested */}
           <div
-            className="p-4 rounded-lg"
-            style={{
-              backgroundColor: 'var(--color-bg-secondary)',
-              borderLeft: '4px solid var(--color-accent-cyan)',
-            }}
+            className="p-4 rounded-lg bg-bg-secondary border-l-4 border-secondary-main"
           >
             <p
-              className="text-sm font-medium mb-1"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="text-sm font-medium mb-1 text-text-secondary"
             >
               Total Invested
             </p>
             <p
-              className="text-3xl font-bold"
-              style={{ color: 'var(--color-accent-cyan)' }}
+              className="text-3xl font-bold text-secondary-main"
             >
               ₹{result.totalInvested.toFixed(2)}
             </p>
@@ -61,21 +46,15 @@ export default function PPFReturnsSummary({ result }: PPFReturnsSummaryProps) {
 
           {/* Interest Earned */}
           <div
-            className="p-4 rounded-lg"
-            style={{
-              backgroundColor: 'var(--color-bg-secondary)',
-              borderLeft: '4px solid var(--color-success)',
-            }}
+            className="p-4 rounded-lg bg-bg-secondary border-l-4 border-success"
           >
             <p
-              className="text-sm font-medium mb-1"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="text-sm font-medium mb-1 text-text-secondary"
             >
               Interest Earned
             </p>
             <p
-              className="text-3xl font-bold"
-              style={{ color: 'var(--color-status-success)' }}
+              className="text-3xl font-bold text-success"
             >
               ₹{result.totalInterestEarned.toFixed(3)}
             </p>
@@ -83,21 +62,15 @@ export default function PPFReturnsSummary({ result }: PPFReturnsSummaryProps) {
 
           {/* Maturity Amount */}
           <div
-            className="p-4 rounded-lg"
-            style={{
-              backgroundColor: 'var(--color-bg-secondary)',
-              borderLeft: '4px solid var(--color-primary-main)',
-            }}
+            className="p-4 rounded-lg bg-bg-secondary border-l-4 border-primary-main"
           >
             <p
-              className="text-sm font-medium mb-1"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="text-sm font-medium mb-1 text-text-secondary"
             >
               Maturity Amount
             </p>
             <p
-              className="text-3xl font-bold"
-              style={{ color: 'var(--color-primary-main)' }}
+              className="text-3xl font-bold text-primary-main"
             >
               ₹{result.maturityAmount.toFixed(3)}
             </p>
@@ -105,21 +78,15 @@ export default function PPFReturnsSummary({ result }: PPFReturnsSummaryProps) {
 
           {/* Absolute Return */}
           <div
-            className="p-4 rounded-lg"
-            style={{
-              backgroundColor: 'var(--color-bg-secondary)',
-              borderLeft: '4px solid var(--color-secondary-main)',
-            }}
+            className="p-4 rounded-lg bg-bg-secondary border-l-4 border-secondary-light"
           >
             <p
-              className="text-sm font-medium mb-1"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="text-sm font-medium mb-1 text-text-secondary"
             >
               Absolute Returns Percentage
             </p>
             <p
-              className="text-3xl font-bold"
-              style={{ color: 'var(--color-secondary-main)' }}
+              className="text-3xl font-bold text-secondary-light"
             >
               {result.absolutReturnPercentage.toFixed(2)}%
             </p>

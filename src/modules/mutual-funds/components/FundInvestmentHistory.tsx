@@ -4,17 +4,13 @@ import type { InvestmentInstallment } from "../types/mutual-funds";
 export default function FundInvestmentHistory({ installments }: { installments: InvestmentInstallment[] }) {
 
     return (
-        <section className="rounded-lg overflow-hidden border"
-            style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-light)',
-            }}
+        <section className="rounded-lg overflow-hidden border bg-bg-secondary border-border-light"
         >
-            <div className="px-6 py-4 border-b" style={{ borderColor: 'var(--color-border-light)' }}>
-                <h2 className="text-2xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+            <div className="px-6 py-4 border-b border-border-light">
+                <h2 className="text-2xl font-bold text-text-primary">
                     Investment Installments
                 </h2>
-                <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+                <p className="text-sm mt-1 text-text-secondary">
                     All SIP and lump sum investment installments with NAV and units on transaction date
                 </p>
             </div>
@@ -22,42 +18,42 @@ export default function FundInvestmentHistory({ installments }: { installments: 
             <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead>
-                        <tr style={{ backgroundColor: 'var(--color-bg-primary)' }}>
-                            <th className="px-6 py-4 text-left font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                        <tr className="bg-bg-primary">
+                            <th className="px-6 py-4 text-left font-semibold text-text-secondary">
                                 Type
                             </th>
-                            <th className="px-6 py-4 text-left font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                            <th className="px-6 py-4 text-left font-semibold text-text-secondary">
                                 Investment Date
                             </th>
-                            <th className="px-6 py-4 text-right font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                            <th className="px-6 py-4 text-right font-semibold text-text-secondary">
                                 Amount
                             </th>
-                            <th className="px-6 py-4 text-right font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                            <th className="px-6 py-4 text-right font-semibold text-text-secondary">
                                Applicable NAV
                             </th>
-                            <th className="px-6 py-4 text-right font-semibold" style={{ color: 'var(--color-text-secondary)' }}>
+                            <th className="px-6 py-4 text-right font-semibold text-text-secondary">
                                 Units
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {installments.map((inst) => (
-                            <tr key={inst.id} style={{ borderBottom: '1px solid var(--color-border-light)' }}>
-                                <td className="px-6 py-4" style={{ color: 'var(--color-text-primary)' }}>
+                            <tr key={inst.id} className="border-b border-border-light">
+                                <td className="px-6 py-4 text-text-primary">
                                     <span className="font-semibold capitalize">
                                         {inst.type === 'lumpsum' ? 'Lump Sum' : 'SIP'}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4" style={{ color: 'var(--color-text-primary)' }}>
+                                <td className="px-6 py-4 text-text-primary">
                                     {moment(inst.installmentDate, 'DD-MM-YYYY').format('DD MMM YYYY')}
                                 </td>
-                                <td className="px-6 py-4 text-right" style={{ color: 'var(--color-accent-cyan)' }}>
+                                <td className="px-6 py-4 text-right text-secondary-main">
                                     ₹{inst.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                                 </td>
-                                <td className="px-6 py-4 text-right" style={{ color: 'var(--color-text-primary)' }}>
+                                <td className="px-6 py-4 text-right text-text-primary">
                                     ₹{inst.nav.toFixed(2)}
                                 </td>
-                                <td className="px-6 py-4 text-right font-semibold" style={{ color: 'var(--color-secondary-main)' }}>
+                                <td className="px-6 py-4 text-right font-semibold text-secondary-main">
                                     {inst.units.toFixed(4)}
                                 </td>
                             </tr>

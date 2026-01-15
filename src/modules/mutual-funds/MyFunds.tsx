@@ -66,29 +66,24 @@ export default function MyFunds() {
 
   return (
     <div
-      className="min-h-screen"
-      style={{ backgroundColor: 'var(--color-bg-primary)' }}
+      className="min-h-screen bg-bg-primary"
     >
       <Header />
       <header
-        className="backdrop-blur-sm py-4"
-        style={{
-          backgroundColor: 'var(--color-bg-primary)',
-        }}
+        className="backdrop-blur-sm py-4 bg-bg-primary"
       >
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 gap-4 items-center mb-4">
           <div>
             <h1
-              className="text-4xl md:text-5xl font-bold"
-              style={{ color: 'var(--color-text-primary)' }}
+              className="text-4xl md:text-5xl font-bold text-text-primary"
             >
               My{' '}
-              <span style={{ color: 'var(--color-secondary-main)' }}>
+              <span className="text-secondary-main">
                 Funds({fundsWithDetails.length})
               </span>
             </h1>
             {fundsWithDetails.length > 0 && (
-              <p className="text-md mt-2" style={{ color: 'var(--color-text-secondary)' }}>
+              <p className="text-md mt-2 text-text-secondary">
                 {fundsWithDetails.length} {fundsWithDetails.length === 1 ? 'fund' : 'funds'} in your portfolio
               </p>
             )}
@@ -96,18 +91,7 @@ export default function MyFunds() {
 
           <button
             onClick={() => navigate('/mutual-funds/explore-funds')}
-            className="px-6 py-2 rounded-lg font-medium transition  w-auto justify-self-end"
-            style={{
-              backgroundColor: 'var(--color-bg-secondary)',
-              color: 'var(--color-text-secondary)',
-              border: `1px solid var(--color-border-main)`,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-bg-tertiary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
-            }}
+            className="px-6 py-2 rounded-lg font-medium transition  w-auto justify-self-end bg-bg-secondary text-text-secondary border border-border-main hover:bg-bg-tertiary"
           >
             Explore Funds
           </button>
@@ -119,28 +103,14 @@ export default function MyFunds() {
           <Loader message="Loading your investments..." fullHeight={true}/>
         ) : fundsWithDetails.length === 0 ? (
           <div
-            className="rounded-lg p-12 text-center border"
-            style={{
-              backgroundColor: 'var(--color-bg-primary)',
-              borderColor: 'var(--color-border-main)',
-            }}
+            className="rounded-lg p-12 text-center border bg-bg-primary border-border-main"
           >
-            <p className="text-lg mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+            <p className="text-lg mb-6 text-text-secondary">
               You haven't added any mutual funds yet.
             </p>
             <button
               onClick={() => navigate('/mutual-funds/explore-funds')}
-              className="px-6 py-3 rounded-lg transition font-medium"
-              style={{
-                backgroundColor: 'var(--color-primary-main)',
-                color: 'var(--color-text-inverse)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-dark)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-main)';
-              }}
+              className="px-6 py-3 rounded-lg transition font-medium bg-primary-main text-text-inverse hover:bg-primary-dark"
             >
               Explore Mutual Funds
             </button>

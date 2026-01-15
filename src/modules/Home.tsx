@@ -5,10 +5,8 @@ import Header from '../components/common/Header';
 export default function Home() {
   const navigate = useNavigate();
 
-
-
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+    <div className="min-h-screen bg-bg-primary">
       <Header />
 
       {/* Main Content */}
@@ -16,14 +14,12 @@ export default function Home() {
         {/* Welcome Section */}
         <section className="mb-16">
           <h2 
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: 'var(--color-text-primary)' }}
+            className="text-4xl md:text-5xl font-bold mb-4 text-text-primary"
           >
             Choose Your Tool
           </h2>
           <p 
-            className="text-xl max-w-2xl"
-            style={{ color: 'var(--color-text-secondary)' }}
+            className="text-xl max-w-2xl text-text-secondary"
           >
             Select which financial tool you'd like to explore today.
           </p>

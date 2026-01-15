@@ -42,15 +42,10 @@ export default function FDForm() {
 
   return (
     <div
-      className="rounded-lg p-8"
-      style={{
-        backgroundColor: 'var(--color-bg-primary)',
-        border: '1px solid var(--color-primary-lighter)',
-      }}
+      className="rounded-lg p-8 bg-bg-primary border border-primary-lighter"
     >
       <h2 
-        className="text-2xl font-bold mb-6"
-        style={{ color: 'var(--color-text-primary)' }}
+        className="text-2xl font-bold mb-6 text-text-primary"
       >
         FD Calculator
       </h2>
@@ -60,8 +55,7 @@ export default function FDForm() {
           {/* Start Date */}
           <div>
             <label
-              className="block font-medium mb-2"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="block font-medium mb-2 text-text-secondary"
             >
               Start Date
             </label>
@@ -70,17 +64,13 @@ export default function FDForm() {
               name="startDate"
               value={formData.startDate}
               onChange={handleChange}
-              className="w-full rounded-lg px-4 py-2 transition border"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-main)',
-                color: 'var(--color-text-primary)',
-              }}
+              className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                e.currentTarget.classList.add('border-primary-main');
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                e.currentTarget.classList.remove('border-primary-main');
+                e.currentTarget.classList.add('border-border-main');
               }}
             />
           </div>
@@ -88,8 +78,7 @@ export default function FDForm() {
           {/* Principal Amount */}
           <div>
             <label
-              className="block font-medium mb-2"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="block font-medium mb-2 text-text-secondary"
             >
               Principal Amount (₹)
             </label>
@@ -100,17 +89,13 @@ export default function FDForm() {
               onChange={handleChange}
               min="1000"
               step="0.01"
-              className="w-full rounded-lg px-4 py-2 transition border"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-main)',
-                color: 'var(--color-text-primary)',
-              }}
+              className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                e.currentTarget.classList.add('border-primary-main');
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                e.currentTarget.classList.remove('border-primary-main');
+                e.currentTarget.classList.add('border-border-main');
               }}
             />
           </div>
@@ -118,8 +103,7 @@ export default function FDForm() {
           {/* Interest Rate */}
           <div>
             <label
-              className="block font-medium mb-2"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="block font-medium mb-2 text-text-secondary"
             >
               Interest Rate (% per annum)
             </label>
@@ -130,17 +114,13 @@ export default function FDForm() {
               onChange={handleChange}
               min="0"
               step="0.01"
-              className="w-full rounded-lg px-4 py-2 transition border"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-main)',
-                color: 'var(--color-text-primary)',
-              }}
+              className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                e.currentTarget.classList.add('border-primary-main');
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                e.currentTarget.classList.remove('border-primary-main');
+                e.currentTarget.classList.add('border-border-main');
               }}
             />
           </div>
@@ -148,15 +128,10 @@ export default function FDForm() {
 
         {/* Tenure Section */}
         <div
-          className="rounded-lg p-6"
-          style={{
-            backgroundColor: 'var(--color-bg-secondary)',
-            border: '1px solid var(--color-border-light)',
-          }}
+          className="rounded-lg p-6 bg-bg-secondary border border-border-light"
         >
           <label
-            className="block font-semibold mb-4"
-            style={{ color: 'var(--color-text-secondary)' }}
+            className="block font-semibold mb-4 text-text-secondary"
           >
             Tenure
           </label>
@@ -164,8 +139,7 @@ export default function FDForm() {
             {/* Tenure - Years */}
             <div>
               <label
-                className="block text-sm font-medium mb-2"
-                style={{ color: 'var(--color-text-secondary)' }}
+                className="block text-sm font-medium mb-2 text-text-secondary"
               >
                 Years
               </label>
@@ -177,17 +151,13 @@ export default function FDForm() {
                 min="0"
                 max="50"
                 step="0.01"
-                className="w-full rounded-lg px-4 py-2 transition border"
-                style={{
-                  backgroundColor: 'var(--color-bg-primary)',
-                  borderColor: 'var(--color-border-main)',
-                  color: 'var(--color-text-primary)',
-                }}
+                className="w-full rounded-lg px-4 py-2 transition border bg-bg-primary border-border-main text-text-primary focus:border-primary-main"
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                  e.currentTarget.classList.add('border-primary-main');
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                  e.currentTarget.classList.remove('border-primary-main');
+                  e.currentTarget.classList.add('border-border-main');
                 }}
               />
             </div>
@@ -195,8 +165,7 @@ export default function FDForm() {
             {/* Tenure - Months */}
             <div>
               <label
-                className="block text-sm font-medium mb-2"
-                style={{ color: 'var(--color-text-secondary)' }}
+                className="block text-sm font-medium mb-2 text-text-secondary"
               >
                 Months
               </label>
@@ -208,17 +177,13 @@ export default function FDForm() {
                 min="0"
                 max="11"
                 step="0.01"
-                className="w-full rounded-lg px-4 py-2 transition border"
-                style={{
-                  backgroundColor: 'var(--color-bg-primary)',
-                  borderColor: 'var(--color-border-main)',
-                  color: 'var(--color-text-primary)',
-                }}
+                className="w-full rounded-lg px-4 py-2 transition border bg-bg-primary border-border-main text-text-primary focus:border-primary-main"
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                  e.currentTarget.classList.add('border-primary-main');
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                  e.currentTarget.classList.remove('border-primary-main');
+                  e.currentTarget.classList.add('border-border-main');
                 }}
               />
             </div>
@@ -226,8 +191,7 @@ export default function FDForm() {
             {/* Tenure - Days */}
             <div>
               <label
-                className="block text-sm font-medium mb-2"
-                style={{ color: 'var(--color-text-secondary)' }}
+                className="block text-sm font-medium mb-2 text-text-secondary"
               >
                 Days
               </label>
@@ -239,17 +203,13 @@ export default function FDForm() {
                 min="0"
                 max="31"
                 step="0.01"
-                className="w-full rounded-lg px-4 py-2 transition border"
-                style={{
-                  backgroundColor: 'var(--color-bg-primary)',
-                  borderColor: 'var(--color-border-main)',
-                  color: 'var(--color-text-primary)',
-                }}
+                className="w-full rounded-lg px-4 py-2 transition border bg-bg-primary border-border-main text-text-primary focus:border-primary-main"
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                  e.currentTarget.classList.add('border-primary-main');
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                  e.currentTarget.classList.remove('border-primary-main');
+                  e.currentTarget.classList.add('border-border-main');
                 }}
               />
             </div>
@@ -260,8 +220,7 @@ export default function FDForm() {
           {/* Compounding Frequency */}
           <div>
             <label
-              className="block font-medium mb-2"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="block font-medium mb-2 text-text-secondary"
             >
               Compounding Frequency
             </label>
@@ -269,17 +228,13 @@ export default function FDForm() {
               name="compounding"
               value={formData.compounding}
               onChange={handleChange}
-              className="w-full rounded-lg px-4 py-2 transition border"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-main)',
-                color: 'var(--color-text-primary)',
-              }}
+              className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                e.currentTarget.classList.add('border-primary-main');
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                e.currentTarget.classList.remove('border-primary-main');
+                e.currentTarget.classList.add('border-border-main');
               }}
             >
               <option value="monthly">Monthly</option>
@@ -292,8 +247,7 @@ export default function FDForm() {
           {/* Payout Type */}
           <div>
             <label
-              className="block font-medium mb-2"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="block font-medium mb-2 text-text-secondary"
             >
               Payout Type
             </label>
@@ -301,17 +255,13 @@ export default function FDForm() {
               name="payoutType"
               value={formData.payoutType}
               onChange={handleChange}
-              className="w-full rounded-lg px-4 py-2 transition border"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                borderColor: 'var(--color-border-main)',
-                color: 'var(--color-text-primary)',
-              }}
+              className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+                e.currentTarget.classList.add('border-primary-main');
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-main)';
+                e.currentTarget.classList.remove('border-primary-main');
+                e.currentTarget.classList.add('border-border-main');
               }}
             >
               <option value="maturity">At Maturity</option>
@@ -324,18 +274,7 @@ export default function FDForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 text-lg"
-          style={{
-            background: 'linear-gradient(to right, var(--color-primary-main), var(--color-secondary-main))',
-            color: 'var(--color-text-inverse)',
-            opacity: 1,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '0.9';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '1';
-          }}
+          className="w-full font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 text-lg bg-gradient-to-r from-primary-main to-secondary-main text-text-inverse hover:opacity-90"
         >
           Calculate FD Returns
         </button>

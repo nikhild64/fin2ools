@@ -56,29 +56,18 @@ export default function MyFundsCard({ scheme, investmentData }: MyFundsCardProps
   
   return (
     <div
-      className="rounded-lg p-4 hover:shadow-lg transition border mb-6 cursor-pointer"
-      style={{
-        backgroundColor: "var(--color-bg-primary)",
-        borderColor: "var(--color-primary-lighter)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--color-primary-main)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--color-primary-lighter)";
-      }}
+      className="rounded-lg p-4 hover:shadow-lg transition border mb-6 cursor-pointer bg-bg-primary border-primary-lighter hover:border-primary-main"
     >
       <div className="grid md:grid-cols-3 gap-4 items-start">
         {/* Scheme Info */}
         <div className="md:col-span-2">
           <h3
-            className="text-lg font-bold mb-2 line-clamp-2"
-            style={{ color: "var(--color-text-primary)" }}
+            className="text-lg font-bold mb-2 line-clamp-2 text-text-primary"
           >
             {scheme.schemeName}
           </h3>
           {scheme.schemeCategory && (
-            <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-xs text-text-secondary">
               <span className="font-semibold">Category:</span> {scheme.schemeCategory}
             </p>
           )}
@@ -86,10 +75,10 @@ export default function MyFundsCard({ scheme, investmentData }: MyFundsCardProps
 
         {/* Current NAV */}
         <div className="text-right">
-          <p className="text-sm mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-sm mb-1 text-text-tertiary">
             Current NAV
           </p>
-          <p className="text-2xl font-bold" style={{ color: "var(--color-secondary-main)" }}>
+          <p className="text-2xl font-bold text-secondary-main">
             ₹{navValue}
           </p>
         </div>
@@ -97,60 +86,52 @@ export default function MyFundsCard({ scheme, investmentData }: MyFundsCardProps
 
       {/* Investment Metrics */}
       <div
-        className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 pt-4 border-t"
-        style={{ borderColor: "var(--color-border-light)" }}
+        className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 pt-4 border-t border-border-light"
       >
         <div>
-          <p className="text-xs mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-xs mb-1 text-text-tertiary">
             Amount Invested
           </p>
-          <p className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-lg font-semibold text-text-primary">
             ₹{investmentMetrics.totalInvested.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
           </p>
         </div>
         <div>
-          <p className="text-xs mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-xs mb-1 text-text-tertiary">
             Current Value
           </p>
-          <p className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-lg font-semibold text-text-primary">
             ₹{investmentMetrics.currentValue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
           </p>
         </div>
         <div>
-          <p className="text-xs mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-xs mb-1 text-text-tertiary">
             Gain / Loss
           </p>
           <p
-            className="text-lg font-semibold"
-            style={{
-              color: isPositive ? "var(--color-success)" : "var(--color-error)",
-            }}
+            className={`text-lg font-semibold ${isPositive ? 'text-success' : 'text-error'}`}
           >
             {investmentMetrics.absoluteGain >= 0 ? '+' : ''}
             ₹{Math.abs(investmentMetrics.absoluteGain).toLocaleString('en-IN', { maximumFractionDigits: 0 })}
           </p>
         </div>
         <div>
-          <p className="text-xs mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-xs mb-1 text-text-tertiary">
             Return %
           </p>
           <p
-            className="text-lg font-semibold"
-            style={{
-              color: isPositive ? "var(--color-success)" : "var(--color-error)",
-            }}
+            className={`text-lg font-semibold ${isPositive ? 'text-success' : 'text-error'}`}
           >
             {investmentMetrics.percentageReturn >= 0 ? '+' : ''}
             {investmentMetrics.percentageReturn.toFixed(2)}%
           </p>
         </div>
         <div>
-          <p className="text-xs mb-1" style={{ color: "var(--color-text-tertiary)" }}>
+          <p className="text-xs mb-1 text-text-tertiary">
             Units Held
           </p>
           <p
-            className="text-lg font-semibold"
-            style={{ color: "var(--color-secondary-main)" }}
+            className="text-lg font-semibold text-secondary-main"
           >
             {investmentMetrics.units?.toFixed(4)}
           </p>
@@ -158,22 +139,10 @@ export default function MyFundsCard({ scheme, investmentData }: MyFundsCardProps
       </div>
 
 
-      <section className="mt-4 border-t pt-4" style={{
-        borderColor: "var(--color-border-light)"
-      }}>
+      <section className="mt-4 border-t border-border-light pt-4">
         <button
           onClick={addMoreInvestments}
-          className="px-6 py-3 rounded-lg transition font-medium"
-          style={{
-            backgroundColor: 'var(--color-primary-main)',
-            color: 'var(--color-text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-primary-dark)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-primary-main)';
-          }}
+          className="px-6 py-3 rounded-lg transition font-medium bg-primary-main text-text-inverse hover:bg-primary-dark"
         >
           + Add More Investment
         </button>

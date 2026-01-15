@@ -11,111 +11,54 @@ export default function FDSummary({ summary }: FDSummaryProps) {
     <div className="grid md:grid-cols-3 gap-6">
       {/* Principal Card */}
       <div
-        className="rounded-lg p-6 transition"
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          border: '1px solid var(--color-border-light)',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-primary-main)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-border-light)';
-        }}
+        className="rounded-lg p-6 transition bg-bg-secondary border border-border-light hover:border-primary-main"
       >
         <div className="flex items-center justify-between mb-2">
-          <h3
-            className="font-semibold"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
+          <h3 className="font-semibold text-text-secondary">
             Principal
           </h3>
           <span className="text-2xl">💰</span>
         </div>
-        <p
-          className="text-3xl font-bold"
-          style={{ color: 'var(--color-text-primary)' }}
-        >
+        <p className="text-3xl font-bold text-text-primary">
           ₹{principal.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
         </p>
-        <p
-          className="text-sm mt-2"
-          style={{ color: 'var(--color-text-secondary)' }}
-        >
+        <p className="text-sm mt-2 text-text-secondary">
           Initial investment
         </p>
       </div>
 
       {/* Total Interest Card */}
       <div
-        className="rounded-lg p-6 transition"
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          border: '1px solid var(--color-border-light)',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-status-success)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-border-light)';
-        }}
+        className="rounded-lg p-6 transition bg-bg-secondary border border-border-light hover:border-success"
       >
         <div className="flex items-center justify-between mb-2">
-          <h3
-            className="font-semibold"
-            style={{ color: 'var(--color-status-success)' }}
-          >
+          <h3 className="font-semibold text-success">
             Total Interest
           </h3>
           <span className="text-2xl">📈</span>
         </div>
-        <p
-          className="text-3xl font-bold"
-          style={{ color: 'var(--color-text-primary)' }}
-        >
+        <p className="text-3xl font-bold text-text-primary">
           ₹{summary.totalInterestEarned.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
         </p>
-        <p
-          className="text-sm mt-2"
-          style={{ color: 'var(--color-status-success)' }}
-        >
+        <p className="text-sm mt-2 text-success">
           Total earnings
         </p>
       </div>
 
       {/* Maturity Amount Card */}
       <div
-        className="rounded-lg p-6 transition"
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          border: '1px solid var(--color-border-light)',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-primary-main)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-border-light)';
-        }}
+        className="rounded-lg p-6 transition bg-bg-secondary border border-border-light hover:border-primary-main"
       >
         <div className="flex items-center justify-between mb-2">
-          <h3
-            className="font-semibold"
-            style={{ color: 'var(--color-primary-main)' }}
-          >
+          <h3 className="font-semibold text-primary-main">
             Maturity Amount
           </h3>
           <span className="text-2xl">🎯</span>
         </div>
-        <p
-          className="text-3xl font-bold"
-          style={{ color: 'var(--color-text-primary)' }}
-        >
+        <p className="text-3xl font-bold text-text-primary">
           ₹{summary.maturityAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
         </p>
-        <p
-          className="text-sm mt-2"
-          style={{ color: 'var(--color-primary-main)' }}
-        >
+        <p className="text-sm mt-2 text-primary-main">
           Total at maturity
         </p>
       </div>

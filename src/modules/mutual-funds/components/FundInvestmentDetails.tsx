@@ -122,7 +122,7 @@ export default function FundInvestmentDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+      <div className="min-h-screen bg-bg-primary">
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-6">
           <Loader message='Loading your investment details...' />
@@ -133,20 +133,16 @@ export default function FundInvestmentDetails() {
 
   if (!scheme || !investmentData) {
     return (
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+      <div className="min-h-screen bg-bg-primary">
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-center flex-col">
           <button
             onClick={() => navigate('/mutual-funds/my-funds')}
-            className="mb-4 px-4 py-2 rounded-lg"
-            style={{
-              backgroundColor: 'var(--color-primary-main)',
-              color: 'var(--color-text-inverse)',
-            }}
+            className="mb-4 px-4 py-2 rounded-lg bg-primary-main text-text-inverse"
           >
             ← Back to My Funds
           </button>
-          <p style={{ color: 'var(--color-error)' }}>Investment data not found</p>
+          <p className="text-error">Investment data not found</p>
         </main>
       </div>
     );
@@ -157,7 +153,7 @@ export default function FundInvestmentDetails() {
   const investmentDuration = calculateInvestmentDuration(investmentData.investments);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+    <div className="min-h-screen bg-bg-primary">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 py-6">
@@ -180,17 +176,7 @@ export default function FundInvestmentDetails() {
         <section className="mb-6 flex gap-3 justify-end">
           <button
             onClick={handleAddLumpsum}
-            className="px-6 py-3 rounded-lg transition font-medium"
-            style={{
-              backgroundColor: 'var(--color-secondary-main)',
-              color: 'var(--color-text-inverse)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.9';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1';
-            }}
+            className="px-6 py-3 rounded-lg transition font-medium bg-secondary-main text-text-inverse hover:opacity-90"
           >
             + Add Lumpsum
           </button>
@@ -204,17 +190,7 @@ export default function FundInvestmentDetails() {
                 );
                 if (activeSIP) handleEditSIP(activeSIP);
               }}
-              className="px-6 py-3 rounded-lg transition font-medium"
-              style={{
-                backgroundColor: 'var(--color-primary-main)',
-                color: 'var(--color-text-inverse)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-dark)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-main)';
-              }}
+              className="px-6 py-3 rounded-lg transition font-medium bg-primary-main text-text-inverse hover:bg-primary-dark"
             >
               Edit SIP
             </button>

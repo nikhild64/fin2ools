@@ -56,17 +56,14 @@ export default function SchemeDetails() {
 
     if (loading) {
         return (
-            <div className="min-h-screen" style={{
-                background: 'var(--color-bg-secondary)',
-            }}>
+            <div className="min-h-screen bg-bg-secondary">
                 <Header />
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="text-center">
                         <div
-                            className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4"
-                            style={{ borderColor: 'var(--color-primary-main)' }}
+                            className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4 border-primary-main"
                         />
-                        <p style={{ color: 'var(--color-text-secondary)' }}>Loading scheme details...</p>
+                        <p className="text-text-secondary">Loading scheme details...</p>
                     </div>
                 </main>
             </div>
@@ -75,18 +72,11 @@ export default function SchemeDetails() {
 
     if (error || !scheme) {
         return (
-            <div className="min-h-screen" style={{
-                background: 'var(--color-bg-secondary)',
-            }}>
+            <div className="min-h-screen bg-bg-secondary">
                 <Header />
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div
-                        className="rounded-lg p-6 mb-6 border"
-                        style={{
-                            backgroundColor: `${'var(--color-error)'}20`,
-                            borderColor: 'var(--color-error)',
-                            color: 'var(--color-error)',
-                        }}
+                        className="rounded-lg p-6 mb-6 border bg-error/20 border-error text-error"
                     >
                         <p className="font-semibold mb-4">{error || 'Scheme not found'}</p>
                     </div>
@@ -98,7 +88,7 @@ export default function SchemeDetails() {
     const currentNav = scheme.nav ? parseFloat(scheme.nav) : 0;
 
     return (
-        <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+        <div className="min-h-screen bg-bg-primary">
             <Header />
 
             <main className="max-w-7xl mx-auto px-4 py-4 mt-0">
@@ -108,8 +98,7 @@ export default function SchemeDetails() {
                 {history && history.data.length > 0 && (
                     <section className="mb-8">
                         <h2
-                            className="text-2xl font-bold mb-4"
-                            style={{ color: 'var(--color-text-primary)' }}
+                            className="text-2xl font-bold mb-4 text-text-primary"
                         >
                             NAV History
                         </h2>
@@ -121,15 +110,10 @@ export default function SchemeDetails() {
                 {(scheme.isinGrowth || scheme.isinDivReinvestment) && (
                     <Accordion title="Additional Information" isOpen={true}>
                         <section
-                            className="rounded-lg p-6"
-                            style={{
-                                backgroundColor: 'var(--color-bg-secondary)',
-                                border: `1px solid var(--color-border-light)`,
-                            }}
+                            className="rounded-lg p-6 bg-bg-secondary border border-border-light"
                         >
                             <h3
-                                className="text-xl font-bold mb-4"
-                                style={{ color: 'var(--color-text-primary)' }}
+                                className="text-xl font-bold mb-4 text-text-primary"
                             >
                                 ISIN Details
                             </h3>
@@ -137,18 +121,12 @@ export default function SchemeDetails() {
                                 {scheme.schemeCategory && (
                                     <div>
                                         <p
-                                            className="text-sm mb-2"
-                                            style={{ color: 'var(--color-text-secondary)' }}
+                                            className="text-sm mb-2 text-text-secondary"
                                         >
                                             Category
                                         </p>
                                         <p
-                                            className="font-mono p-3 rounded"
-                                            style={{
-                                                color: 'var(--color-text-primary)',
-                                                backgroundColor: 'var(--color-bg-primary)',
-                                                border: `1px solid var(--color-border-light)`,
-                                            }}
+                                            className="font-mono p-3 rounded text-text-primary bg-bg-primary border border-border-light"
                                         >
                                             {scheme.schemeCategory}
                                         </p>
@@ -158,18 +136,12 @@ export default function SchemeDetails() {
                                 {scheme.schemeType && (
                                     <div>
                                         <p
-                                            className="text-sm mb-2"
-                                            style={{ color: 'var(--color-text-secondary)' }}
+                                            className="text-sm mb-2 text-text-secondary"
                                         >
                                             Type
                                         </p>
                                         <p
-                                            className="font-mono p-3 rounded"
-                                            style={{
-                                                color: 'var(--color-text-primary)',
-                                                backgroundColor: 'var(--color-bg-primary)',
-                                                border: `1px solid var(--color-border-light)`,
-                                            }}
+                                            className="font-mono p-3 rounded text-text-primary bg-bg-primary border border-border-light"
                                         >
                                             {scheme.schemeType}
                                         </p>
@@ -178,18 +150,12 @@ export default function SchemeDetails() {
                                 {scheme.isinGrowth && (
                                     <div>
                                         <p
-                                            className="text-sm mb-2"
-                                            style={{ color: 'var(--color-text-secondary)' }}
+                                            className="text-sm mb-2 text-text-secondary"
                                         >
                                             Growth ISIN
                                         </p>
                                         <p
-                                            className="font-mono p-3 rounded"
-                                            style={{
-                                                color: 'var(--color-text-primary)',
-                                                backgroundColor: 'var(--color-bg-primary)',
-                                                border: `1px solid var(--color-border-light)`,
-                                            }}
+                                            className="font-mono p-3 rounded text-text-primary bg-bg-primary border border-border-light"
                                         >
                                             {scheme.isinGrowth}
                                         </p>
@@ -198,18 +164,12 @@ export default function SchemeDetails() {
                                 {scheme.isinDivReinvestment && (
                                     <div>
                                         <p
-                                            className="text-sm mb-2"
-                                            style={{ color: 'var(--color-text-secondary)' }}
+                                            className="text-sm mb-2 text-text-secondary"
                                         >
                                             Dividend Reinvestment ISIN
                                         </p>
                                         <p
-                                            className="font-mono p-3 rounded"
-                                            style={{
-                                                color: 'var(--color-text-primary)',
-                                                backgroundColor: 'var(--color-bg-primary)',
-                                                border: `1px solid var(--color-border-light)`,
-                                            }}
+                                            className="font-mono p-3 rounded text-text-primary bg-bg-primary border border-border-light"
                                         >
                                             {scheme.isinDivReinvestment}
                                         </p>

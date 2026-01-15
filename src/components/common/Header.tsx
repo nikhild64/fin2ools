@@ -9,39 +9,19 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className="border-b backdrop-blur-md sticky top-0 z-50"
-        style={{
-          backgroundColor: 'var(--color-bg-primary)',
-          borderColor: 'var(--color-border-main)',
-        }}
-      >
+      <header className="border-b border-border-main bg-bg-primary backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center space-x-2 hover:opacity-80 transition"
-              style={{
-                backgroundColor: 'transparent'
-              }}
+              className="flex items-center space-x-2 hover:opacity-80 transition bg-transparent"
             >
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
-                style={{
-                  background: 'var(--color-primary-main)',
-                }}
-              >
-                <span
-                  className="font-bold text-2xl"
-                  style={{ color: 'var(--color-text-inverse)' }}
-                >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-main">
+                <span className="font-bold text-2xl text-text-inverse">
                   ₹
                 </span>
               </div>
-              <h1
-                className="text-lg font-bold"
-                style={{ color: 'var(--color-text-primary)' }}
-              >
+              <h1 className="text-lg font-bold text-text-primary">
                 fin2ools
               </h1>
             </button>
@@ -49,29 +29,25 @@ export default function Header() {
             {/* Hamburger Menu Button - Mobile */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden flex flex-col gap-1 p-2 rounded-lg transition"
-              style={{
-                backgroundColor: isMenuOpen ? 'var(--color-bg-secondary)' : 'transparent',
-              }}
+              className={`md:hidden flex flex-col gap-1 p-2 rounded-lg transition ${
+                isMenuOpen ? 'bg-bg-secondary' : 'bg-transparent'
+              }`}
             >
               <span
-                className="w-6 h-0.5 transition-all"
+                className="w-6 h-0.5 transition-all bg-text-primary"
                 style={{
-                  backgroundColor: 'var(--color-text-primary)',
                   transform: isMenuOpen ? 'rotate(45deg) translateY(8px)' : 'rotate(0)',
                 }}
               />
               <span
-                className="w-6 h-0.5 transition-all"
+                className="w-6 h-0.5 transition-all bg-text-primary"
                 style={{
-                  backgroundColor: 'var(--color-text-primary)',
                   opacity: isMenuOpen ? '0' : '1',
                 }}
               />
               <span
-                className="w-6 h-0.5 transition-all"
+                className="w-6 h-0.5 transition-all bg-text-primary"
                 style={{
-                  backgroundColor: 'var(--color-text-primary)',
                   transform: isMenuOpen ? 'rotate(-45deg) translateY(-8px)' : 'rotate(0)',
                 }}
               />

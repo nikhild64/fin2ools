@@ -49,11 +49,7 @@ export default function ReturnsCalculator({ navData, currentNav }: ReturnsCalcul
         <div className="space-y-6 p-3">
             {/* Timeframe Selector */}
             <div
-              className="rounded-lg p-4"
-              style={{
-                backgroundColor: 'var(--color-bg-secondary)',
-                border: `1px solid var(--color-border-light)`,
-              }}
+              className="rounded-lg p-4 bg-bg-secondary border border-border-light"
             >
                 <div className="flex flex-wrap gap-2 md:gap-3">
                     {TIMEFRAMES.map(({ label }) => {
@@ -64,20 +60,11 @@ export default function ReturnsCalculator({ navData, currentNav }: ReturnsCalcul
                                 key={label}
                                 onClick={() => setSelectedTimeframe(label)}
                                 disabled={!metric.isAvailable}
-                                className={getTimeFrameClassname(label, metric)}
-                                style={
+                                className={`${getTimeFrameClassname(label, metric)} ${
                                   isSelected
-                                    ? {
-                                        backgroundColor: 'var(--color-primary-main)',
-                                        color: 'var(--color-text-inverse)',
-                                        borderColor: 'var(--color-primary-main)',
-                                      }
-                                    : {
-                                        backgroundColor: 'transparent',
-                                        color: 'var(--color-text-secondary)',
-                                        borderColor: 'var(--color-border-light)',
-                                      }
-                                }
+                                    ? 'bg-primary-main text-text-inverse border-primary-main'
+                                    : 'bg-transparent text-text-secondary border-border-light hover:opacity-80'
+                                }`}
                             >
                                 {label}
                             </button>
@@ -94,49 +81,27 @@ export default function ReturnsCalculator({ navData, currentNav }: ReturnsCalcul
             {/* Chart Type Selector and Chart */}
             {selectedMetric.isAvailable && filteredNavData.length > 0 && (
                 <div
-                  className="rounded-lg p-4 space-y-4"
-                  style={{
-                    backgroundColor: "var(--color-bg-secondary)",
-                    border: `1px solid var(--color-border-lighter)`,
-                  }}
+                  className="rounded-lg p-4 space-y-4 bg-bg-secondary border border-border-light"
                 >
                     {/* Chart Type Selector */}
                     <div className="flex gap-2">
                         <button
                             onClick={() => setChartType('line')}
-                            className="px-4 py-2 rounded-lg transition font-medium text-sm border"
-                            style={
+                            className={`px-4 py-2 rounded-lg transition font-medium text-sm border ${
                               chartType === 'line'
-                                ? {
-                                    backgroundColor: 'var(--color-primary-main)',
-                                    color: "var(--color-text-inverse)",
-                                    borderColor: "var(--color-primary-lighter)",
-                                  }
-                                : {
-                                    backgroundColor: 'transparent',
-                                    color: 'var(--color-text-secondary)',
-                                    borderColor: 'var(--color-border-light)',
-                                  }
-                            }
+                                ? 'bg-primary-main text-text-inverse border-primary-lighter'
+                                : 'bg-transparent text-text-secondary border-border-light'
+                            }`}
                         >
                             Line Chart
                         </button>
                         <button
                             onClick={() => setChartType('histogram')}
-                            className="px-4 py-2 rounded-lg transition font-medium text-sm border"
-                            style={
+                            className={`px-4 py-2 rounded-lg transition font-medium text-sm border ${
                               chartType === 'histogram'
-                                ? {
-                                    backgroundColor: 'var(--color-primary-main)',
-                                    color: 'var(--color-text-inverse)',
-                                    borderColor: 'var(--color-primary-lighter)',
-                                  }
-                                : {
-                                    backgroundColor: 'transparent',
-                                    color: 'var(--color-text-secondary)',
-                                    borderColor: 'var(--color-border-light)',
-                                  }
-                            }
+                                ? 'bg-primary-main text-text-inverse border-primary-lighter'
+                                : 'bg-transparent text-text-secondary border-border-light'
+                            }`}
                         >
                             Histogram
                         </button>
@@ -163,14 +128,10 @@ export default function ReturnsCalculator({ navData, currentNav }: ReturnsCalcul
 
             {!selectedMetric.isAvailable && (
                 <div
-                  className="rounded-lg p-6"
-                  style={{
-                    backgroundColor: "var(--color-bg-secondary)",
-                    border: `1px solid var(--color-border-light)`,
-                  }}
+                  className="rounded-lg p-6 bg-bg-secondary border border-border-light"
                 >
                     <div className="text-center py-8">
-                        <p style={{ color: "var(--color-text-secondary)" }}>
+                        <p className="text-text-secondary">
                             Insufficient data available for returns calculation
                         </p>
                     </div>

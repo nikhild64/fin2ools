@@ -67,11 +67,10 @@ const Alert = ({ message, type, onClose, autoCloseDuration = 10000 }: AlertProps
 
     return (
         <div
-            className=" max-w-sm rounded-lg p-4 shadow-lg border-l-4 flex items-start gap-3 animate-in fade-in slide-in-from-right-4 z-50"
+            className="max-w-sm rounded-lg p-4 shadow-lg border-l-4 flex items-start gap-3 animate-slideIn z-50"
             style={{
                 backgroundColor: colors.backgroundColor,
                 borderLeftColor: colors.borderColor,
-                animation: 'slideIn 0.3s ease-out',
             }}
         >
             <span
@@ -93,8 +92,8 @@ const Alert = ({ message, type, onClose, autoCloseDuration = 10000 }: AlertProps
                     setIsVisible(false);
                     onClose();
                 }}
-                className="flex-shrink-0 ml-2 text-lg font-semibold transition hover:opacity-70"
-                style={{ color: colors.textColor, backgroundColor: 'transparent' }}
+                className="flex-shrink-0 ml-2 text-lg font-semibold transition hover:opacity-70 bg-transparent"
+                style={{ color: colors.textColor }}
                 title="Close alert"
             >
                 ✕

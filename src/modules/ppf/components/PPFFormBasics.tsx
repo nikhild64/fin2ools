@@ -18,10 +18,9 @@ const PPFFormBasics = ({
       {/* Start Year - REQUIRED */}
       <div>
         <label
-          className="block font-medium mb-2"
-          style={{ color: 'var(--color-text-secondary)' }}
+          className="block font-medium mb-2 text-text-secondary"
         >
-          Start Year <span style={{ color: 'var(--color-status-error)' }}>*</span>
+          Start Year <span className="text-error">*</span>
         </label>
         <input
           type="number"
@@ -30,21 +29,20 @@ const PPFFormBasics = ({
           min="1900"
           max={currentYear}
           placeholder="Enter start year"
-          className="w-full rounded-lg px-4 py-2 transition border"
-          style={{
-            backgroundColor: 'var(--color-bg-secondary)',
-            borderColor: startYear ? 'var(--color-border-main)' : 'var(--color-status-error)',
-            color: 'var(--color-text-primary)',
-          }}
+          className={`w-full rounded-lg px-4 py-2 transition border bg-bg-secondary text-text-primary focus:border-primary-main ${
+            startYear ? 'border-border-main' : 'border-error'
+          }`}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+            e.currentTarget.classList.add('border-primary-main');
           }}
           onBlur={(e) => {
-            e.currentTarget.style.borderColor = startYear ? 'var(--color-border-main)' : 'var(--color-status-error)';
+            if (!startYear) {
+              e.currentTarget.classList.add('border-error');
+            }
           }}
         />
         {!startYear && (
-          <p className="text-xs mt-2" style={{ color: 'var(--color-status-error)' }}>
+          <p className="text-xs mt-2 text-error">
             Start year is required
           </p>
         )}
@@ -53,8 +51,7 @@ const PPFFormBasics = ({
       {/* Interest Rate */}
       <div>
         <label
-          className="block font-medium mb-2"
-          style={{ color: 'var(--color-text-secondary)' }}
+          className="block font-medium mb-2 text-text-secondary"
         >
           Interest Rate (% per annum)
         </label>
@@ -64,17 +61,12 @@ const PPFFormBasics = ({
           onChange={(e) => onInterestRateChange(parseFloat(e.target.value))}
           min="0"
           step="0.01"
-          className="w-full rounded-lg px-4 py-2 transition border"
-          style={{
-            backgroundColor: 'var(--color-bg-secondary)',
-            borderColor: 'var(--color-border-main)',
-            color: 'var(--color-text-primary)',
-          }}
+          className="w-full rounded-lg px-4 py-2 transition border bg-bg-secondary border-border-main text-text-primary focus:border-primary-main"
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = 'var(--color-primary-main)';
+            e.currentTarget.classList.add('border-primary-main');
           }}
           onBlur={(e) => {
-            e.currentTarget.style.borderColor = 'var(--color-border-main)';
+            e.currentTarget.classList.remove('border-primary-main');
           }}
         />
       </div>
