@@ -9,12 +9,6 @@ export default function PrivacyNotice() {
             <Header />
             <main className="max-w-4xl mx-auto px-4 py-12">
                 <div className="bg-bg-secondary border border-border-main rounded-lg p-8">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="mb-6 text-primary-main hover:text-primary-dark transition font-medium text-sm"
-                    >
-                        ← Back
-                    </button>
 
                     <h1 className="text-4xl font-bold text-text-primary mb-2">Privacy Notice</h1>
                     <p className="text-text-secondary text-sm mb-8">Last Updated: January 2026</p>
