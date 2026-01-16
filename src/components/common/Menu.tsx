@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 export default function Menu({ isMobile }: { isMobile: boolean }) {
-  const classes = isMobile ? "grid grid-cols-1 md:hidden gap-4 mt-4 pt-4 border-t border-border-light space-y-3" : "hidden md:flex space-x-8";
+  const classes = isMobile ? "grid grid-cols-1 md:hidden gap-4 mt-4 pt-4 border-t border-border-light space-y-3" : "hidden md:flex space-x-8 items-center";
     return (
         <nav className={classes}>
             <Link
@@ -27,6 +27,12 @@ export default function Menu({ isMobile }: { isMobile: boolean }) {
                 className="transition text-text-secondary hover:text-text-primary"
             >
                 PPF
+            </Link>
+            <Link
+                to="/privacy"
+                className="transition text-text-secondary hover:text-text-primary"
+            >
+                Privacy & Terms
             </Link>
         </nav>
     )

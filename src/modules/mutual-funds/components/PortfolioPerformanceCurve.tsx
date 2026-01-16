@@ -85,20 +85,28 @@ export default function PortfolioPerformanceCurve(
 
         const navHistories = new Map();
 
-        // Fetch NAV histories for all schemes
-        for (const { scheme } of fundDetails) {
+        // Fetch NAV histories for all schemes in parallel
+        const historyPromises = fundDetails.map(async ({ scheme }) => {
           try {
             const history = await getOrFetchSchemeHistory(scheme.schemeCode, 3650); // Get 10 years of history
             if (history?.data && Array.isArray(history.data) && history.data.length > 0) {
-              navHistories.set(scheme.schemeCode, history.data);
+              return { schemeCode: scheme.schemeCode, data: history.data };
             } else {
               console.warn(`No NAV history available for scheme ${scheme.schemeCode}`);
+              return { schemeCode: scheme.schemeCode, data: null };
             }
           } catch (histErr) {
             console.error(`Error fetching NAV history for scheme ${scheme.schemeCode}:`, histErr);
-            // Continue with other schemes instead of breaking
+            return { schemeCode: scheme.schemeCode, data: null };
           }
-        }
+        });
+
+        const historyResults = await Promise.all(historyPromises);
+        historyResults.forEach(({ schemeCode, data }) => {
+          if (data) {
+            navHistories.set(schemeCode, data);
+          }
+        });
 
         if (navHistories.size === 0) {
           console.warn('No NAV histories available for any scheme');

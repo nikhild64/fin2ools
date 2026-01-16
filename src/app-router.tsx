@@ -6,20 +6,23 @@ import './App.css';
 import Loader from './components/common/Loader';
 import Footer from './components/common/Footer';
 import AlertContainer from './components/common/AlertContainer';
+import { PrivacyModal } from './components/common/PrivacyModal';
 
-// Lazy load FD and Mutual Funds pages for code splitting
+// Lazy load pages
 const FD = lazy(() => import('./modules/fd/FD'));
 const MutualFunds = lazy(() => import('./modules/mutual-funds/MutualFunds'));
 const SchemeDetails = lazy(() => import('./modules/mutual-funds/SchemeDetails'));
 const MyFunds = lazy(() => import('./modules/mutual-funds/MyFunds'));
 const FundInvestmentDetails = lazy(() => import('./modules/mutual-funds/components/FundInvestmentDetails'));
 const PPF = lazy(() => import('./modules/ppf/PPF'));
+const PrivacyNotice = lazy(() => import('./modules/PrivacyNotice'));
 
 const Layout = () => {
     return (
         <>
             <ScrollRestoration />
             <AlertContainer />
+            <PrivacyModal />
             <Outlet />
             <Footer />
         </>
@@ -102,6 +105,13 @@ const routes = [
                 element: (
                     <Suspense fallback={<Loader fullHeight={true} />}>
                         <PPF />
+                    </Suspense>
+                ),
+            }, {
+                path: "privacy",
+                element: (
+                    <Suspense fallback={<Loader fullHeight={true} />}>
+                        <PrivacyNotice />
                     </Suspense>
                 ),
             }

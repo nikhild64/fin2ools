@@ -43,27 +43,38 @@ export const calculatePortfolioPerformanceTimeline = (
       return [];
     }
 
-    // Convert to sorted array
-    const allDates = Array.from(dateSet)
+    // Convert to sorted array and reduce excessive dates by sampling
+    let allDates = Array.from(dateSet)
       .sort((a, b) => {
         const dateA = moment(a, 'DD-MM-YYYY');
         const dateB = moment(b, 'DD-MM-YYYY');
         return dateA.diff(dateB);
       });
 
+    // If we have too many dates, sample them to reduce computation
+    const MAX_DATES = 500;
+    if (allDates.length > MAX_DATES) {
+      const interval = Math.ceil(allDates.length / MAX_DATES);
+      allDates = allDates.filter((_, i) => i % interval === 0 || i === allDates.length - 1);
+    }
+
+    // Pre-create moment objects for investments for reuse
+    const investmentMoments = investments.map((inv) => ({
+      investment: inv,
+      startMoment: moment(inv.startDate, 'DD-MM-YYYY'),
+    }));
+
     const snapshots: PortfolioValueSnapshot[] = [];
 
     allDates.forEach((date) => {
       let totalInvested = 0;
       let totalCurrentValue = 0;
+      const snapshotMoment = moment(date, 'DD-MM-YYYY');
 
-      investments.forEach((investment) => {
+      investmentMoments.forEach(({ investment, startMoment }) => {
         try {
-          const investmentDate = moment(investment.startDate, 'DD-MM-YYYY');
-          const snapshotDate = moment(date, 'DD-MM-YYYY');
-
           // Skip if snapshot date is before investment date
-          if (snapshotDate.isBefore(investmentDate)) return;
+          if (snapshotMoment.isBefore(startMoment)) return;
 
           const navHistory = navHistories.get(investment.schemeCode);
           if (!navHistory || !Array.isArray(navHistory) || navHistory.length === 0) return;
@@ -72,7 +83,7 @@ export const calculatePortfolioPerformanceTimeline = (
           const filteredNavHistory = navHistory.filter((nav) => {
             if (!nav || !nav.date) return false;
             const navDate = moment(nav.date, 'DD-MM-YYYY');
-            return navDate.isSameOrBefore(snapshotDate);
+            return navDate.isSameOrBefore(snapshotMoment);
           });
 
           if (filteredNavHistory.length === 0) return;
@@ -83,7 +94,7 @@ export const calculatePortfolioPerformanceTimeline = (
             ...investment,
             // Ensure sipEndDate doesn't exceed snapshot date for accurate calculation
             sipEndDate: investment.sipEndDate
-              ? moment(investment.sipEndDate, 'DD-MM-YYYY').isBefore(snapshotDate)
+              ? moment(investment.sipEndDate, 'DD-MM-YYYY').isBefore(snapshotMoment)
                 ? investment.sipEndDate
                 : date
               : date,

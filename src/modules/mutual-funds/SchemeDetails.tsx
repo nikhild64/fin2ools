@@ -36,7 +36,7 @@ export default function SchemeDetails() {
                 }
 
                 // Then, fetch history after scheme details are loaded
-                const historyData = await getOrFetchSchemeHistory(parseInt(schemeCode), 10);
+                const historyData = await getOrFetchSchemeHistory(parseInt(schemeCode), 3650); // 10 years of history
 
                 if (historyData) {
                     setHistory(historyData);
