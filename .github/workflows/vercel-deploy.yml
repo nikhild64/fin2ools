@@ -38,11 +38,8 @@ jobs:
           # Install Vercel CLI globally
           npm i -g vercel
 
-          # Authenticate using the token
-          echo "$VERCEL_TOKEN" | vercel login --token ${{ env.VERCEL_TOKEN }} --confirm
-
+          # # Authenticate using the token
+          # echo "$VERCEL_TOKEN" | vercel login --token ${{ env.VERCEL_TOKEN }} --confirm
+          echo "Deploying to Vercel..."
           # Deploy – `--prod` makes it a production deployment
-          vercel --prod \
-            --token ${{ env.VERCEL_TOKEN }} \
-            --confirm \
-            --no-clipboard
+          vercel --prod --token ${{ env.VERCEL_TOKEN }} --confirm --no-clipboard
