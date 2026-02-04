@@ -8,14 +8,16 @@ import MyFundsCard from './components/MyFundsCard';
 import MyFundsSummary from './components/MyFundsSummary';
 import Accordion from '../../components/common/Accordion';
 import Loader from '../../components/common/Loader';
+import { useStorageInit } from '../../lib/hooks/useStorageInit';
 
 const PortfolioPerformanceCurve = lazy(
   () => import('./components/PortfolioPerformanceCurve')
 );
 
 export default function MyFunds() {
+  const { isReady } = useStorageInit(); // Initialize storage based on auth mode
   const navigate = useNavigate();
-  const { loadInvestments, getAllInvestments, hasInvestments } = useInvestmentStore();
+  const { loadInvestments, investments } = useInvestmentStore();
   const { loadSchemes, getOrFetchSchemeDetails } = useMutualFundsStore();
   const [fundsWithDetails, setFundsWithDetails] = useState<
     Array<{
@@ -26,15 +28,23 @@ export default function MyFunds() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadInvestments();
-    loadSchemes();
-  }, [loadInvestments, loadSchemes]);
+    if (!isReady) {
+      setLoading(true); // Show loader while storage is initializing
+      return;
+    }
+    
+    const initializeData = async () => {
+      setLoading(true);
+      await loadInvestments();
+      await loadSchemes();
+    };
+    initializeData();
+  }, [isReady, loadInvestments, loadSchemes]);
 
   useEffect(() => {
     const loadFundDetails = async () => {
-      const investments = getAllInvestments();
-
       if (investments.length === 0) {
+        setFundsWithDetails([]);
         setLoading(false);
         return;
       }
@@ -63,7 +73,7 @@ export default function MyFunds() {
     };
 
     loadFundDetails();
-  }, [getAllInvestments, hasInvestments, getOrFetchSchemeDetails]);
+  }, [investments, getOrFetchSchemeDetails]);
 
  const handleCardClick = (schemeCode: string | number) => {
     navigate(`/mutual-funds/my-funds/investment/${schemeCode}`);

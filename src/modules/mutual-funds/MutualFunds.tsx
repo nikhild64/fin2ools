@@ -1,8 +1,10 @@
 
 import Header from '../../components/common/Header';
 import MutualFundList from './components/MutualFundList';
+import { useStorageInit } from '../../lib/hooks/useStorageInit';
 
 export default function MutualFunds() {
+  useStorageInit(); // Initialize storage based on auth mode
   return (
     <div className="min-h-screen bg-bg-primary">
       <Header />

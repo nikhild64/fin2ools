@@ -72,7 +72,7 @@ export default function LineChart({ navData, timeframeLabel }: LineChartProps) {
                 },
             },
             tooltip: {
-                mode: 'index',
+                mode: 'index' as const,
                 intersect: false,
                 backgroundColor: 'rgba(15, 23, 42, 0.9)',
                 titleColor: '#f1f5f9',

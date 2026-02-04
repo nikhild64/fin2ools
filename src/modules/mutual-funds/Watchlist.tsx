@@ -7,8 +7,10 @@ import { useMutualFundsStore } from './store/mutualFundsStore';
 import type { MutualFundScheme } from './types/mutual-funds';
 import MutualFundCard from './components/MutualFundCard';
 import Loader from '../../components/common/Loader';
+import { useStorageInit } from '../../lib/hooks/useStorageInit';
 
 export default function Watchlist() {
+  const { isReady } = useStorageInit(); // Initialize storage based on auth mode
   const navigate = useNavigate();
   const { loadWatchlist, watchlist } = useWatchlistStore();
   const { loadSchemes, getOrFetchSchemeDetails } = useMutualFundsStore();
@@ -18,9 +20,18 @@ export default function Watchlist() {
   const [selectedFundHouse, setSelectedFundHouse] = useState<string>('all');
 
   useEffect(() => {
-    loadWatchlist();
-    loadSchemes();
-  }, [loadWatchlist, loadSchemes]);
+    if (!isReady) {
+      setLoading(true); // Show loader while storage is initializing
+      return;
+    }
+    
+    const initializeData = async () => {
+      setLoading(true);
+      await loadWatchlist();
+      await loadSchemes();
+    };
+    initializeData();
+  }, [isReady, loadWatchlist, loadSchemes]);
 
   useEffect(() => {
     const loadWatchlistDetails = async () => {
