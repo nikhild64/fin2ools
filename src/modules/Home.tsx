@@ -1,13 +1,25 @@
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import FeatureTile from '../components/common/FeatureTile';
 import Header from '../components/common/Header';
+import MigrationPrompt from '../components/common/MigrationPrompt';
+import { useStorageInit } from '../lib/hooks/useStorageInit';
+import { useMigrationCheck } from '../lib/hooks/useMigrationCheck';
 
 export default function Home() {
   const navigate = useNavigate();
+  useStorageInit(); // Initialize storage based on auth mode
+  const { shouldShowMigration } = useMigrationCheck();
+  const [showMigration, setShowMigration] = useState(true);
 
   return (
     <div className="min-h-screen bg-bg-primary">
       <Header />
+
+      {/* Migration Prompt */}
+      {shouldShowMigration && showMigration && (
+        <MigrationPrompt onComplete={() => setShowMigration(false)} />
+      )}
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

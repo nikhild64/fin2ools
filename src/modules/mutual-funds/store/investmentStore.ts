@@ -1,26 +1,33 @@
-import { create } from 'zustand';
-import type { UserInvestmentData } from '../types/mutual-funds';
-import { localStorageService } from '../utils/userMutualFundsService';
+import { create } from "zustand";
+import type { UserInvestmentData } from "../types/mutual-funds";
+import { localStorageService } from "../utils/userMutualFundsService";
 
 interface InvestmentStore {
   investments: UserInvestmentData[];
   hasInvestments: boolean;
-  loadInvestments: () => void;
+  loading: boolean;
+  loadInvestments: () => Promise<void>;
   getAllInvestments: () => UserInvestmentData[];
-  addInvestment: (schemeCode: number, investment: any) => void;
-  removeInvestment: (schemeCode: number, investmentIndex: number) => void;
+  addInvestment: (schemeCode: number, investment: any) => Promise<void>;
+  removeInvestment: (
+    schemeCode: number,
+    investmentIndex: number,
+  ) => Promise<void>;
   getSchemeInvestments: (schemeCode: number) => UserInvestmentData;
 }
 
 export const useInvestmentStore = create<InvestmentStore>((set, get) => ({
   investments: [],
   hasInvestments: false,
+  loading: false,
 
-  loadInvestments: () => {
-    const investments = localStorageService.getUserInvestments();
-    set({ 
+  loadInvestments: async () => {
+    set({ loading: true });
+    const investments = await localStorageService.getUserInvestments();
+    set({
       investments,
-      hasInvestments: investments.length > 0 
+      hasInvestments: investments.length > 0,
+      loading: false,
     });
   },
 
@@ -28,17 +35,23 @@ export const useInvestmentStore = create<InvestmentStore>((set, get) => ({
     return get().investments;
   },
 
-  addInvestment: (schemeCode: number, investment: any) => {
-    localStorageService.addInvestment(schemeCode, investment);
-    get().loadInvestments();
+  addInvestment: async (schemeCode: number, investment: any) => {
+    await localStorageService.addInvestment(schemeCode, investment);
+    await get().loadInvestments();
   },
 
-  removeInvestment: (schemeCode: number, investmentIndex: number) => {
-    localStorageService.removeInvestment(schemeCode, investmentIndex);
-    get().loadInvestments();
+  removeInvestment: async (schemeCode: number, investmentIndex: number) => {
+    await localStorageService.removeInvestment(schemeCode, investmentIndex);
+    await get().loadInvestments();
   },
 
   getSchemeInvestments: (schemeCode: number): UserInvestmentData => {
-    return localStorageService.getSchemeInvestments(schemeCode)||{ schemeCode, investments: []};
+    const investments = get().investments;
+    return (
+      investments.find((item) => item.schemeCode === schemeCode) || {
+        schemeCode,
+        investments: [],
+      }
+    );
   },
 }));

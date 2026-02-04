@@ -7,6 +7,7 @@ import Loader from './components/common/Loader';
 import Footer from './components/common/Footer';
 import AlertContainer from './components/common/AlertContainer';
 import { PrivacyModal } from './components/common/PrivacyModal';
+import { AuthSelection } from './modules/auth';
 
 // Lazy load pages
 const FD = lazy(() => import('./modules/fd/FD'));
@@ -33,15 +34,15 @@ const Layout = () => {
 
 const routes = [
     {
+        path: "/auth",
+        element: <AuthSelection />,
+    },
+    {
         path: "/",
         element: <Layout />,
         children: [
             {
                 index: true,
-                element: <Home />,
-            },
-            {
-                path: "home",
                 element: <Home />,
             },
             {
