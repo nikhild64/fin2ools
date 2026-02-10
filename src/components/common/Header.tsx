@@ -24,12 +24,12 @@ export default function Header() {
               <img src="/logo.svg" className="min-h-12" />
             </Link>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-row-reverse md:flex-row">
               <Menu />
               
               {/* User Profile / Auth Status */}
               {authMode === 'firebase' && user ? (
-                <div className="hidden md:block relative">
+                <div className="block relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg bg-bg-secondary hover:bg-opacity-80 transition"
@@ -65,7 +65,7 @@ export default function Header() {
                   )}
                 </div>
               ) : authMode === 'local' && (
-                <div className="hidden md:block relative">
+                <div className="block relative">
                   <button
                     onClick={() => setShowLocalMenu(!showLocalMenu)}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg bg-bg-secondary hover:bg-opacity-80 transition"

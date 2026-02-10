@@ -23,11 +23,11 @@ export default function MutualFundCard({ scheme }: MutualFundCardProps) {
             try {
                 setIsLoadingChange(true);
                 // Fetch 2 days of data to calculate 1D change
-                const historyData = await getOrFetchSchemeHistory(scheme.schemeCode, 2);
+                const historyData = await getOrFetchSchemeHistory(scheme.schemeCode, 7);
 
                 if (historyData?.data && historyData.data.length >= 2) {
-                    const previousNav = parseFloat(historyData.data[0].nav);
-                    const latestNav = parseFloat(historyData.data[1].nav);
+                    const previousNav = parseFloat(historyData.data[historyData.data.length - 2].nav);
+                    const latestNav = parseFloat(historyData.data[historyData.data.length - 1].nav);
                     const change = ((latestNav - previousNav) / previousNav) * 100;
                     setOneDayChange(change);
                 }
