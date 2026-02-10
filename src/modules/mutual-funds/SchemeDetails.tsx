@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import type { MutualFundScheme, SchemeHistoryResponse } from './types/mutual-funds';
 import { useMutualFundsStore } from './store/mutualFundsStore';
 import Header from '../../components/common/Header';
-import ReturnsCalculator from './components/ReturnsCalculator';
 import Accordion from '../../components/common/Accordion';
 import FundHeader from './components/FundHeader';
+import Loader from '../../components/common/Loader';
+
+const SchemeReturns = lazy(() => import('./components/SchemeReturns'));
+const SchemeInformation = lazy(() => import('./components/SchemeInformation'));
+const SimilarFunds = lazy(() => import('./components/SimilarFunds'));
 
 export default function SchemeDetails() {
     const { schemeCode } = useParams<{ schemeCode: string }>();
@@ -91,20 +95,40 @@ export default function SchemeDetails() {
         <div className="min-h-screen bg-bg-primary">
             <Header />
 
-            <main className="max-w-7xl mx-auto px-4 py-4 mt-0">
+            <main className="max-w-7xl mx-auto px-4 py-4 mt-0 grid grid-cols-1 gap-6">
                 <FundHeader scheme={scheme} />
 
                 {/* Returns Summary */}
                 {history && history.data.length > 0 && (
-                    <section className="mb-8">
+                    <section className="">
                         <h2
-                            className="text-2xl font-bold mb-4 text-text-primary"
+                            className="text-2xl font-bold text-text-primary mb-2"
                         >
                             NAV History
                         </h2>
-                        <ReturnsCalculator navData={history.data} currentNav={currentNav} />
+                        <Suspense fallback={<Loader />}>
+                            <SchemeReturns navData={history.data} currentNav={currentNav} />
+                        </Suspense>
                     </section>
                 )}
+                {
+                    scheme.details && (
+                        <Accordion title="Scheme Information" isOpen={true} >
+                            <Suspense fallback={<Loader />}>
+                                <SchemeInformation details={scheme.details} />
+                            </Suspense>
+                        </Accordion>
+                    )
+                }
+                {
+                    scheme.details && scheme.details.comparison?.length > 0 && (
+                        <Accordion title="Similar Funds" isOpen={true} >
+                            <Suspense fallback={<Loader />}>
+                                <SimilarFunds funds={scheme.details.comparison} />
+                            </Suspense>
+                        </Accordion>
+                    )
+                }
 
                 {/* Additional Info */}
                 {(scheme.isinGrowth || scheme.isinDivReinvestment) && (
@@ -112,11 +136,6 @@ export default function SchemeDetails() {
                         <section
                             className="rounded-lg p-6 bg-bg-secondary border border-border-light"
                         >
-                            <h3
-                                className="text-xl font-bold mb-4 text-text-primary"
-                            >
-                                ISIN Details
-                            </h3>
                             <div className="grid md:grid-cols-2 gap-6">
                                 {scheme.schemeCategory && (
                                     <div>

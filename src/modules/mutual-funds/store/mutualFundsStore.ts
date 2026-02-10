@@ -87,9 +87,10 @@ export const useMutualFundsStore = create<MutualFundsStore>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const data = await fetchLatestNAV(1000, 0);
+      const sortedData = data.sort((a, b) => (a.schemeName > b.schemeName ? 1 : -1));
       set({
-        schemes: data,
-        filteredSchemes: data,
+        schemes: sortedData,
+        filteredSchemes: sortedData,
         hasLoaded: true,
         isLoading: false,
       });

@@ -1,5 +1,6 @@
 import type { MutualFundScheme } from "../types/mutual-funds";
 import SchemeNAV from "./SchemeNAV";
+import AddToMyFunds from "./AddToMyFunds";
 
 export default function FundHeader({ scheme, duration }: { scheme: MutualFundScheme; duration?: string }) {
 
@@ -30,8 +31,10 @@ export default function FundHeader({ scheme, duration }: { scheme: MutualFundSch
                         )
                     }
                 </div>
-
-                <SchemeNAV scheme={scheme} />
+                <div>
+                    <SchemeNAV scheme={scheme} />
+                    <AddToMyFunds scheme={scheme} />
+                </div>
             </div>
         </section >
     )

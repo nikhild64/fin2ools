@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useMutualFundsStore } from '../store/mutualFundsStore';
 import SearchableSelect from '../../../components/common/SearchableSelect';
 import MutualFundCard from './MutualFundCard';
+import Pagination from '../../../components/common/Pagination';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -64,13 +65,16 @@ export default function MutualFundList() {
   const categoryFilteredSchemes = useMemo(() => {
     let filtered = filteredSchemes;
 
+
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(scheme => scheme.schemeCategory === selectedCategory);
     }
 
+
     if (selectedFundHouse !== 'all') {
       filtered = filtered.filter(scheme => scheme.fundHouse === selectedFundHouse);
     }
+
 
     return filtered;
   }, [filteredSchemes, selectedCategory, selectedFundHouse]);

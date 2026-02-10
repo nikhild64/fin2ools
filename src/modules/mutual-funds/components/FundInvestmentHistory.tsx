@@ -1,7 +1,23 @@
 import moment from "moment";
 import type { InvestmentInstallment } from "../types/mutual-funds";
+import Pagination from "../../../components/common/Pagination";
+import { useEffect, useMemo, useState } from "react";
 
 export default function FundInvestmentHistory({ installments }: { installments: InvestmentInstallment[] }) {
+    const PAGE_SIZE = 20;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [installments])
+    const onPageChange = (page: number) => {
+        setCurrentPage(page)
+    };
+
+    const itemsDisplayed = useMemo(() => {
+        const start = (currentPage - 1) * PAGE_SIZE;
+        return installments?.slice(start, start + PAGE_SIZE) || [];
+    }, [installments, currentPage]);
 
     return (
         <section className="rounded-lg overflow-hidden border bg-bg-secondary border-border-light"
@@ -29,15 +45,19 @@ export default function FundInvestmentHistory({ installments }: { installments: 
                                 Amount
                             </th>
                             <th className="px-6 py-4 text-right font-semibold text-text-secondary">
-                               Applicable NAV
+                                Stamp Duty(0.005%)
                             </th>
+                            <th className="px-6 py-4 text-right font-semibold text-text-secondary">
+                                Applicable NAV
+                            </th>
+
                             <th className="px-6 py-4 text-right font-semibold text-text-secondary">
                                 Units
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {installments.map((inst) => (
+                        {itemsDisplayed.map((inst) => (
                             <tr key={inst.id} className="border-b border-border-light">
                                 <td className="px-6 py-4 text-text-primary">
                                     <span className="font-semibold capitalize">
@@ -50,6 +70,9 @@ export default function FundInvestmentHistory({ installments }: { installments: 
                                 <td className="px-6 py-4 text-right text-secondary-main">
                                     ₹{inst.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                                 </td>
+                                <td className="px-6 py-4 text-right text-secondary-main">
+                                    ₹{inst.stampDuty.toLocaleString('en-IN', { maximumFractionDigits: 4 })}
+                                </td>
                                 <td className="px-6 py-4 text-right text-text-primary">
                                     ₹{inst.nav.toFixed(2)}
                                 </td>
@@ -61,6 +84,11 @@ export default function FundInvestmentHistory({ installments }: { installments: 
                     </tbody>
                 </table>
             </div>
+            {
+                installments && installments.length > PAGE_SIZE && (
+                    <Pagination items={installments} itemsPerPage={PAGE_SIZE} pageChange={onPageChange} />
+                )
+            }
         </section>
     )
 }

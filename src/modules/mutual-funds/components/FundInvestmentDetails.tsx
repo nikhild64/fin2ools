@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import type {
   MutualFundScheme,
@@ -15,12 +15,14 @@ import {
 import { useMutualFundsStore } from '../store/mutualFundsStore';
 import { useInvestmentStore } from '../store';
 import Header from '../../../components/common/Header';
-import FundInvestmentSummary from './FundInvestmentSummary';
-import AddInvestmentModal from './AddInvestmentModal';
+import FundHeader from './FundHeader';
 import Accordion from '../../../components/common/Accordion';
 import Loader from '../../../components/common/Loader';
-import FundInvestmentHistory from './FundInvestmentHistory';
-import FundHeader from './FundHeader';
+
+const InvestmentPerformanceCurve = lazy(() => import('./InvestmentPerformanceCurve'));
+const FundInvestmentSummary = lazy(() => import('./FundInvestmentSummary'));
+const AddInvestmentModal = lazy(() => import('./AddInvestmentModal'));
+const FundInvestmentHistory = lazy(() => import('./FundInvestmentHistory'));
 
 export default function FundInvestmentDetails() {
   const { schemeCode } = useParams<{ schemeCode: string }>();
@@ -155,30 +157,52 @@ export default function FundInvestmentDetails() {
   return (
     <div className="min-h-screen bg-bg-primary">
       <Header />
-
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      {metrics ? <main className="max-w-7xl mx-auto px-4 py-6">
 
         <FundHeader scheme={scheme} duration={investmentDuration} />
 
-        {/* Investment Summary */}
         <section className="mb-6">
           <Accordion title="Investment Summary" isOpen={true}>
-            <FundInvestmentSummary
-              metrics={metrics}
-              currentNav={currentNav}
-              investmentData={investmentData}
-              navHistory={navHistory}
-            />
+            <Suspense fallback={<Loader />}>
+              <FundInvestmentSummary
+                metrics={metrics}
+                currentNav={currentNav}
+                investmentData={investmentData}
+                navHistory={navHistory}
+              />
+            </Suspense>
           </Accordion>
         </section>
 
+        <section className="mb-6">
+          {
+            navHistory?.length ? (
+              <Suspense fallback={<Loader />}>
+                <InvestmentPerformanceCurve
+                  fundDetails={[
+                    {
+                      investmentData,
+                      scheme
+                    }
+                  ]}
+                  navHistoryData={
+                    [
+                      { data: navHistory, schemeCode: scheme.schemeCode }
+                    ]
+                  }
+                  investments={[investmentData]}
+                />
+              </Suspense>) : <Loader />
+          }
+        </section>
+        
         {/* Action Buttons */}
         <section className="mb-6 flex gap-3 justify-end">
           <button
             onClick={handleAddLumpsum}
-            className="px-6 py-3 rounded-lg transition font-medium bg-secondary-main text-text-inverse hover:opacity-90"
+            className="rounded-lg transition font-medium bg-secondary-main text-text-inverse hover:opacity-90"
           >
-            + Add Lumpsum
+            + Add Investment
           </button>
 
           {/* Show Edit SIP button only if there's an active SIP */}
@@ -196,23 +220,30 @@ export default function FundInvestmentDetails() {
             </button>
           )}
         </section>
+        <Suspense fallback={<Loader />}>
+          <FundInvestmentHistory installments={installments} />
+        </Suspense>
+      </main> :
+        <Loader />
+      }
 
-        <FundInvestmentHistory installments={installments} />
-      </main>
 
       {/* Investment Modal (Add or Edit) */}
-      <AddInvestmentModal
-        isOpen={showAddModal}
-        onClose={() => {
-          setShowAddModal(false);
-          setEditingSIP(null);
-        }}
-        onSubmit={handleInvestmentSubmit}
-        schemeName={scheme?.schemeName || ''}
-        schemeCode={scheme?.schemeCode || 0}
-        editingInvestment={editingSIP || undefined}
-        mode={modalMode}
-      />
+      <Suspense>
+        <AddInvestmentModal
+          isOpen={showAddModal}
+          onClose={() => {
+            setShowAddModal(false);
+            setEditingSIP(null);
+          }}
+          onSubmit={handleInvestmentSubmit}
+          schemeName={scheme?.schemeName || ''}
+          schemeCode={scheme?.schemeCode || 0}
+          editingInvestment={editingSIP || undefined}
+          mode={modalMode}
+        />
+      </Suspense>
+
     </div>
   );
 }
