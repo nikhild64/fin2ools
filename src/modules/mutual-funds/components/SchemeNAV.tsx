@@ -23,6 +23,7 @@ export default function SchemeNAV({ scheme }: { scheme: MutualFundScheme }) {
                                 <Alert type='warning'
                                     autoCloseDuration={0}
                                     showCloseIcon={false}
+                                    onClose={() => {}}
                                     message={`Latest NAV available is ${Math.abs(lasNavTimePeriod)} weeks old. Please verify if scheme is still active.`}
                                 >
                                 </Alert>

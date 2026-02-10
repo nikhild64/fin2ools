@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { useMutualFundsStore } from '../store/mutualFundsStore';
 import SearchableSelect from '../../../components/common/SearchableSelect';
 import MutualFundCard from './MutualFundCard';
-import Pagination from '../../../components/common/Pagination';
 
 const ITEMS_PER_PAGE = 12;
 
